@@ -3,22 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Proyecto - LATAM Digital DTI Hub</title>
+    <title>DTI LATAM | Diseño Tecnología e Ingeniería S.A.S. | Soluciones en acero inoxidable</title>
+    <meta name="description" content="Diseño, fabricación e instalación de soluciones en acero inoxidable para sectores hospitalario, farmacéutico y alimentario. Higiene, durabilidad, precisión y respaldo técnico.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f9;
-            color: #333;
-            padding: 50px;
+        :root {
+            --color-green: oklch(78% 0.2 135);
+            --color-green-dim: oklch(65% 0.15 135);
+            --color-green-light: oklch(92% 0.06 135);
+            --color-blue: oklch(52% 0.2 260);
+            --color-blue-light: oklch(88% 0.06 260);
+            --color-blue-dim: oklch(42% 0.16 260);
+            --color-silver: oklch(72% 0.01 260);
+            --color-bg: oklch(97% 0.006 260);
+            --color-bg-alt: oklch(94% 0.008 135);
+            --color-surface: oklch(99% 0.003 260);
+            --color-text: oklch(16% 0.012 260);
+            --color-text-secondary: oklch(36% 0.01 260);
+            --color-text-muted: oklch(50% 0.008 260);
+            --color-border: oklch(88% 0.01 260);
+            --color-dark: oklch(18% 0.015 260);
+            --color-dark-surface: oklch(22% 0.012 260);
+            --color-dark-text: oklch(93% 0.005 260);
+            --color-dark-muted: oklch(68% 0.008 260);
+            --font: 'Sora', system-ui, sans-serif;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+            --space-4xl: 128px;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
         }
-        h1 {
-            color: #007bff;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-optical-sizing: auto; }
+        body { font-family: var(--font); font-size: 16px; line-height: 1.6; color: var(--color-text); background: var(--color-bg); -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--space-md) var(--space-xl); display: flex; align-items: center; justify-content: space-between; transition: background 0.3s var(--ease-out-expo), backdrop-filter 0.3s; }
+        .nav.scrolled { background: oklch(18% 0.015 260 / 0.95); backdrop-filter: blur(12px); }
+        .nav-logo-text { font-weight: 800; font-size: 1.5rem; color: var(--color-dark-text); letter-spacing: -0.04em; line-height: 1; }
+        .nav-logo-text .latam { font-weight: 400; font-size: 0.75rem; color: var(--color-green); display: block; margin-top: 2px; letter-spacing: 0.15em; }
+        .nav-links { display: flex; gap: var(--space-lg); list-style: none; }
+        .nav-links a { color: var(--color-dark-muted); text-decoration: none; font-size: 0.8125rem; font-weight: 400; transition: color 0.15s; }
+        .nav-links a:hover { color: var(--color-dark-text); }
+        .nav-cta { background: var(--color-green); color: oklch(16% 0.02 135); border: none; padding: 10px 20px; border-radius: 6px; font-family: var(--font); font-size: 0.8125rem; font-weight: 600; cursor: pointer; transition: transform 0.15s var(--ease-out-expo), opacity 0.15s; }
+        .nav-cta:hover { transform: scale(1.03); opacity: 0.9; }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .nav-toggle span { display: block; width: 20px; height: 2px; background: var(--color-dark-text); margin: 5px 0; }
+        .hero { background: var(--color-dark); min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: var(--space-4xl) var(--space-xl) var(--space-3xl); position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -30%; left: -10%; width: 50%; height: 80%; background: radial-gradient(ellipse, oklch(50% 0.1 135 / 0.06) 0%, transparent 60%); pointer-events: none; }
+        .hero::after { content: ''; position: absolute; bottom: -20%; right: -10%; width: 50%; height: 70%; background: radial-gradient(ellipse, oklch(45% 0.12 260 / 0.08) 0%, transparent 60%); pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-eyebrow { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-green); margin-bottom: var(--space-lg); display: flex; align-items: center; gap: var(--space-sm); }
+        .hero-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--color-green); border-radius: 1px; }
+        .hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 700; line-height: 1.1; color: var(--color-dark-text); max-width: 600px; letter-spacing: -0.035em; margin-bottom: var(--space-lg); }
+        .hero h1 em { font-style: normal; color: var(--color-green); }
+        .hero-subtitle { font-size: clamp(0.9375rem, 1.2vw, 1rem); color: var(--color-dark-muted); max-width: 500px; line-height: 1.75; margin-bottom: var(--space-xl); font-weight: 300; }
+        .hero-ctas { display: flex; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-xl); }
+        .btn-primary { background: var(--color-green); color: oklch(16% 0.02 135); border: none; padding: 14px 28px; border-radius: 6px; font-family: var(--font); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: transform 0.15s var(--ease-out-expo), opacity 0.15s; text-decoration: none; display: inline-block; }
+        .btn-primary:hover { transform: translateY(-1px); opacity: 0.9; }
+        .btn-secondary { background: transparent; color: var(--color-dark-muted); border: 1px solid oklch(35% 0.012 260); padding: 14px 28px; border-radius: 6px; font-family: var(--font); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: border-color 0.15s, color 0.15s; text-decoration: none; display: inline-block; }
+        .btn-secondary:hover { border-color: var(--color-blue); color: var(--color-dark-text); }
+        .hero-stats { display: flex; gap: var(--space-xl); }
+        .hero-stat strong { display: block; font-size: 1.75rem; font-weight: 700; color: var(--color-dark-text); font-variant-numeric: tabular-nums; }
+        .hero-stat span { font-size: 0.6875rem; color: oklch(50% 0.008 260); }
+        .hero-gallery { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: var(--space-sm); padding: var(--space-lg); }
+        .hero-photo { border-radius: 10px; overflow: hidden; position: relative; border: 1px solid oklch(28% 0.01 260); transition: transform 0.3s var(--ease-out-expo); aspect-ratio: 4/3; }
+        .hero-photo:hover { transform: scale(1.02); }
+        .hero-photo:first-child { grid-row: 1 / 3; aspect-ratio: auto; border-radius: 12px; }
+        .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hero-photo-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--space-md); background: linear-gradient(transparent, oklch(10% 0.01 260 / 0.85)); }
+        .hero-photo-overlay span { font-size: 0.6875rem; color: var(--color-dark-text); font-weight: 500; }
+        .clients-bar { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: var(--space-lg) var(--space-xl); }
+        .clients-bar-label { font-size: 0.625rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); text-align: center; margin-bottom: var(--space-md); }
+        .clients-scroll { display: flex; gap: var(--space-xl); justify-content: center; flex-wrap: wrap; align-items: center; }
+        .client-name { font-size: 0.75rem; font-weight: 500; color: var(--color-text-muted); white-space: nowrap; opacity: 0.7; transition: opacity 0.2s; }
+        .client-name:hover { opacity: 1; }
+        .trust-strip { background: var(--color-bg); padding: var(--space-2xl) var(--space-xl); }
+        .trust-strip-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-xl); }
+        .trust-item { text-align: center; }
+        .trust-item-icon { width: 32px; height: 32px; margin: 0 auto var(--space-sm); color: var(--color-blue); }
+        .trust-item h4 { font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px; }
+        .trust-item p { font-size: 0.75rem; color: var(--color-text-muted); line-height: 1.5; }
+        .section { padding: var(--space-3xl) var(--space-xl); max-width: 1200px; margin: 0 auto; }
+        .section-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-green-dim); margin-bottom: var(--space-md); }
+        .section-title { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.12; color: var(--color-text); margin-bottom: var(--space-md); }
+        .section-subtitle { font-size: 1rem; color: var(--color-text-secondary); max-width: 580px; line-height: 1.7; font-weight: 300; }
+        .value-grid { margin-top: var(--space-xl); display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-3xl); align-items: start; }
+        .value-text { font-size: 1.0625rem; color: var(--color-text-secondary); line-height: 1.8; font-weight: 300; }
+        .value-text strong { color: var(--color-text); font-weight: 600; }
+        .value-benefits { display: flex; flex-direction: column; gap: var(--space-lg); }
+        .value-benefit { display: flex; gap: var(--space-md); align-items: flex-start; }
+        .value-benefit-marker { width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: var(--color-green); margin-top: 8px; }
+        .value-benefit p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; }
+        .gallery-section { background: var(--color-dark); padding: var(--space-3xl) 0; }
+        .gallery-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-xl); }
+        .gallery-section .section-label { color: var(--color-green); }
+        .gallery-section .section-title { color: var(--color-dark-text); }
+        .gallery-section .section-subtitle { color: var(--color-dark-muted); }
+        .gallery-grid { margin-top: var(--space-xl); display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 280px; gap: var(--space-md); }
+        .gallery-item { border-radius: 12px; overflow: hidden; position: relative; transition: transform 0.3s var(--ease-out-expo); background: var(--color-dark-surface); }
+        .gallery-item:hover { transform: translateY(-3px); }
+        .gallery-item.featured { grid-column: 1 / 3; grid-row: 1 / 3; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-item-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--space-lg); background: linear-gradient(transparent, oklch(8% 0.01 260 / 0.9)); }
+        .gallery-badge { display: inline-block; font-size: 0.625rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-green); background: oklch(78% 0.2 135 / 0.12); padding: 4px 10px; border-radius: 100px; margin-bottom: var(--space-sm); }
+        .gallery-item-overlay h4 { font-size: 1rem; font-weight: 600; color: var(--color-dark-text); margin-bottom: 2px; }
+        .gallery-item-overlay p { font-size: 0.75rem; color: var(--color-dark-muted); }
+        .services-section { background: var(--color-bg-alt); padding: var(--space-3xl) 0; }
+        .services-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-xl); }
+        .services-grid { margin-top: var(--space-xl); display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+        .service-block { background: var(--color-surface); padding: var(--space-xl) var(--space-lg); transition: transform 0.3s var(--ease-out-expo); }
+        .service-block:hover { transform: translateY(-2px); }
+        .service-block:first-child { border-radius: 12px 0 0 0; }
+        .service-block:nth-child(2) { border-radius: 0 12px 0 0; }
+        .service-block:nth-child(3) { border-radius: 0 0 0 12px; }
+        .service-block:last-child { border-radius: 0 0 12px 0; }
+        .service-number { font-size: 0.6875rem; font-weight: 600; color: var(--color-blue); letter-spacing: 0.05em; margin-bottom: var(--space-md); }
+        .service-block h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-sm); }
+        .service-block p { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7; max-width: 48ch; }
+        .products-grid { margin-top: var(--space-xl); display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-md); }
+        .product-item { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: var(--space-lg) var(--space-md); text-align: center; transition: border-color 0.2s, transform 0.3s var(--ease-out-expo); }
+        .product-item:hover { border-color: var(--color-green); transform: translateY(-2px); }
+        .product-item-icon { width: 28px; height: 28px; margin: 0 auto var(--space-sm); color: var(--color-blue); }
+        .product-item h4 { font-size: 0.8125rem; font-weight: 500; color: var(--color-text); }
+        .sectors-grid { margin-top: var(--space-xl); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+        .sector-item { padding: var(--space-xl) var(--space-lg); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; transition: border-color 0.2s, transform 0.3s var(--ease-out-expo); }
+        .sector-item:hover { border-color: var(--color-blue); transform: translateY(-3px); }
+        .sector-icon { width: 36px; height: 36px; margin-bottom: var(--space-md); color: var(--color-blue); }
+        .sector-item h3 { font-size: 1rem; font-weight: 600; margin-bottom: var(--space-sm); }
+        .sector-item p { font-size: 0.8125rem; color: var(--color-text-muted); line-height: 1.7; }
+        .why-section { background: var(--color-bg-alt); padding: var(--space-3xl) 0; }
+        .why-inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-xl); }
+        .why-grid { margin-top: var(--space-xl); display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
+        .why-item { display: flex; gap: var(--space-md); align-items: flex-start; padding: var(--space-lg); background: var(--color-surface); border-radius: 10px; border: 1px solid var(--color-border); transition: border-color 0.2s; }
+        .why-item:hover { border-color: var(--color-green); }
+        .why-item-number { font-size: 1.25rem; font-weight: 700; color: var(--color-green); min-width: 28px; }
+        .why-item-text h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; }
+        .why-item-text p { font-size: 0.8125rem; color: var(--color-text-muted); line-height: 1.6; }
+        .process-grid { margin-top: var(--space-xl); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+        .process-step { position: relative; padding: var(--space-lg) var(--space-md); }
+        .process-step::before { content: ''; position: absolute; top: 0; left: var(--space-md); right: var(--space-md); height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--color-green), var(--color-blue)); opacity: 0.2; }
+        .process-step:first-child::before { opacity: 1; }
+        .process-step-num { font-size: 2rem; font-weight: 700; color: var(--color-green-light); letter-spacing: -0.03em; margin-bottom: var(--space-sm); }
+        .process-step h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: var(--space-sm); }
+        .process-step p { font-size: 0.8125rem; color: var(--color-text-muted); line-height: 1.6; }
+        .cta-section { background: var(--color-dark); padding: var(--space-3xl) var(--space-xl); text-align: center; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle, oklch(50% 0.1 135 / 0.05) 0%, oklch(45% 0.1 260 / 0.03) 40%, transparent 70%); pointer-events: none; }
+        .cta-section h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--color-dark-text); font-weight: 700; letter-spacing: -0.02em; margin-bottom: var(--space-md); position: relative; }
+        .cta-section > p { color: var(--color-dark-muted); max-width: 520px; margin: 0 auto var(--space-xl); font-size: 0.9375rem; line-height: 1.7; font-weight: 300; position: relative; }
+        .cta-buttons { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; position: relative; }
+        .gerente-card { margin-top: var(--space-xl); display: inline-flex; align-items: center; gap: var(--space-lg); background: var(--color-dark-surface); border: 1px solid oklch(28% 0.012 260); border-radius: 12px; padding: var(--space-lg) var(--space-xl); position: relative; }
+        .gerente-avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--color-green), var(--color-blue)); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; color: oklch(16% 0.02 135); }
+        .gerente-info h4 { font-size: 1rem; font-weight: 600; color: var(--color-dark-text); }
+        .gerente-info .role { font-size: 0.75rem; color: var(--color-green); font-weight: 500; margin-bottom: 4px; }
+        .gerente-info .contact-line { font-size: 0.75rem; color: var(--color-dark-muted); }
+        .faq-list { margin-top: var(--space-xl); max-width: 700px; }
+        .faq-item { border-bottom: 1px solid var(--color-border); }
+        .faq-question { width: 100%; background: none; border: none; padding: var(--space-lg) 0; font-family: var(--font); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--color-text); gap: var(--space-md); transition: color 0.15s; }
+        .faq-question:hover { color: var(--color-blue); }
+        .faq-icon { width: 20px; height: 20px; min-width: 20px; transition: transform 0.3s var(--ease-out-expo); color: var(--color-text-muted); }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out-expo); }
+        .faq-item.open .faq-answer { max-height: 200px; padding-bottom: var(--space-lg); }
+        .faq-answer p { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7; max-width: 60ch; }
+        .footer { background: oklch(12% 0.015 260); padding: var(--space-2xl) var(--space-xl) var(--space-lg); }
+        .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid oklch(20% 0.01 260); }
+        .footer-brand-name { font-size: 1.25rem; font-weight: 800; color: var(--color-dark-text); letter-spacing: -0.03em; margin-bottom: 2px; }
+        .footer-brand-sub { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.05em; color: var(--color-green); margin-bottom: var(--space-md); }
+        .footer-brand-desc { font-size: 0.8125rem; color: oklch(55% 0.008 260); line-height: 1.6; max-width: 300px; }
+        .footer-apics { margin-top: var(--space-md); font-size: 0.6875rem; color: var(--color-silver); font-weight: 500; }
+        .footer-col h5 { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(50% 0.008 260); margin-bottom: var(--space-md); }
+        .footer-col a, .footer-col p { display: block; font-size: 0.8125rem; color: oklch(68% 0.008 260); text-decoration: none; margin-bottom: var(--space-sm); transition: color 0.15s; }
+        .footer-col a:hover { color: var(--color-dark-text); }
+        .footer-gerente { margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid oklch(22% 0.01 260); }
+        .footer-gerente strong { display: block; font-size: 0.8125rem; color: var(--color-dark-text); font-weight: 600; }
+        .footer-gerente span { font-size: 0.6875rem; color: var(--color-green); font-weight: 500; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md); }
+        .footer-copy { font-size: 0.75rem; color: oklch(40% 0.008 260); }
+        .footer-location { font-size: 0.75rem; color: oklch(45% 0.008 260); }
+        .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 1024px) { .hero { grid-template-columns: 1fr; min-height: auto; padding-top: var(--space-4xl); gap: var(--space-xl); } .hero-gallery { padding: 0; } .value-grid { grid-template-columns: 1fr; gap: var(--space-xl); } .services-grid { grid-template-columns: 1fr; } .service-block { border-radius: 0 !important; } .service-block:first-child { border-radius: 12px 12px 0 0 !important; } .service-block:last-child { border-radius: 0 0 12px 12px !important; } .sectors-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: 1fr 1fr; } .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 220px; } .gallery-item.featured { grid-column: 1 / 3; grid-row: auto; } .footer-top { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .nav-toggle { display: block; } .nav-cta { display: none; } .hero { padding: var(--space-4xl) var(--space-lg) var(--space-2xl); } .hero-gallery { grid-template-columns: 1fr; } .hero-photo:first-child { grid-row: auto; aspect-ratio: 16/9; } .hero-photo { aspect-ratio: 16/9; } .section { padding: var(--space-2xl) var(--space-lg); } .services-inner, .why-inner, .gallery-inner { padding: 0 var(--space-lg); } .services-section, .why-section, .gallery-section { padding: var(--space-2xl) 0; } .trust-strip-inner { grid-template-columns: 1fr 1fr; } .process-grid { grid-template-columns: 1fr; } .hero-ctas { flex-direction: column; } .btn-primary, .btn-secondary { text-align: center; } .cta-section { padding: var(--space-2xl) var(--space-lg); } .clients-scroll { gap: var(--space-md); } .hero-stats { gap: var(--space-lg); } .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; } .gallery-item.featured { grid-column: auto; } .footer-top { grid-template-columns: 1fr; } .gerente-card { flex-direction: column; text-align: center; } }
+        @media (max-width: 480px) { .trust-strip-inner { grid-template-columns: 1fr; } .products-grid { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body>
-    <h1>¡Mi proyecto está en vivo!</h1>
-    <p>Bienvenido a la página oficial de LATAM Digital DTI Hub en GitHub Pages.</p>
+    <nav class="nav" id="nav">
+        <div class="nav-logo-text">DTI<span class="latam">LATAM</span></div><ul class="nav-links">
+            <li><a href="#soluciones">Soluciones</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#sectores">Sectores</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <button class="nav-cta">Solicitar cotización</button>
+        <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-eyebrow fade-up">Diseño Tecnología e Ingeniería S.A.S.</p>
+            <h1 class="fade-up">No forjamos el acero, <em>lo convertimos en arte</em></h1>
+            <p class="hero-subtitle fade-up">Diseñamos, fabricamos e instalamos soluciones en acero inoxidable para hospitales, laboratorios y plantas de alimentos. Servicios estructurales de ingeniería con precisión, higiene y respaldo técnico.</p>
+            <div class="hero-ctas fade-up">
+                <a href="#contacto" class="btn-primary">Solicitar asesoría especializada</a>
+                <a href="#proceso" class="btn-secondary">Agendar visita técnica</a>
+            </div>
+            <div class="hero-stats fade-up">
+                <div class="hero-stat"><strong>17+</strong><span>Clientes corporativos</span></div>
+                <div class="hero-stat"><strong>3</strong><span>Sectores industriales</span></div>
+                <div class="hero-stat"><strong>APICS</strong><span>Certificación</span></div>
+            </div>
+        </div>
+        <div class="hero-gallery fade-up">
+            <div class="hero-photo">
+                <img src="https://lh3.googleusercontent.com/d/1s291oyKz2yyJtdaotKrZT-QuVTes9Fjy" alt="Proyecto DTI LATAM - Fundación Valle del Lili">
+                <div class="hero-photo-overlay"><span>Fundación Valle del Lili</span></div>
+            </div>
+            <div class="hero-photo">
+                <img src="https://lh3.googleusercontent.com/d/1fBYM6K5BHoAu7FOscFgUcpJkYWU9ebuE" alt="DTI LATAM - Fabricación especializada">
+                <div class="hero-photo-overlay"><span>Fabricación especializada</span></div>
+            </div>
+            <div class="hero-photo">
+                <img src="https://lh3.googleusercontent.com/d/1Q3hmjBtZDcQXSeEgJF9glcSEZjzjFWRi" alt="DTI LATAM - Montajes industriales">
+                <div class="hero-photo-overlay"><span>Montajes industriales</span></div>
+            </div>
+        </div>
+    </section>
+    <section class="clients-bar">
+        <p class="clients-bar-label">Confían en nosotros</p>
+        <div class="clients-scroll">
+            <span class="client-name">Fundación Valle del Lili</span>
+            <span class="client-name">Clínica Imbanaco</span>
+            <span class="client-name">Productos Roche</span>
+            <span class="client-name">Lácteos La Alquería</span>
+            <span class="client-name">ABT Molecular Imaging (USA)</span>
+            <span class="client-name">Mexifrost (USA)</span>
+            <span class="client-name">Gama Nuclear</span>
+            <span class="client-name">Clínica Rey David</span>
+            <span class="client-name">Comfandi</span>
+            <span class="client-name">Super de Alimentos</span>
+            <span class="client-name">Clínica Vida</span>
+            <span class="client-name">Sky Lab. de Colombia</span>
+        </div>
+    </section>
+    <section class="trust-strip">
+        <div class="trust-strip-inner">
+            <div class="trust-item fade-up">
+                <svg class="trust-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <h4>Higiene garantizada</h4><p>Diseños para máxima asepsia</p>
+            </div>
+            <div class="trust-item fade-up">
+                <svg class="trust-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <h4>Tecnología de punta</h4><p>Fabricación avanzada</p>
+            </div>
+            <div class="trust-item fade-up">
+                <svg class="trust-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <h4>Soluciones a medida</h4><p>Cada proyecto personalizado</p>
+            </div>
+            <div class="trust-item fade-up">
+                <svg class="trust-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                <h4>Miembro APICS</h4><p>Estándares internacionales</p>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="fade-up"><p class="section-label">Propuesta de valor</p><h2 class="section-title">Soluciones que elevan el estándar de su operación</h2></div>
+        <div class="value-grid">
+            <div class="value-text fade-up"><p>En DTI LATAM integramos <strong>visión técnica, capacidad de fabricación y entendimiento operativo</strong> para desarrollar soluciones en acero inoxidable que responden a las exigencias reales de cada entorno.</p><br><p>Somos una empresa metalmecánica con proyección y liderazgo, dedicada a satisfacer necesidades empresariales con <strong>tecnología de punta en diseño, fabricación de piezas y montajes industriales</strong> en acero inoxidable.</p></div>
+            <div class="value-benefits fade-up">
+                <div class="value-benefit"><div class="value-benefit-marker"></div><p>Diseños pensados para higiene y fácil mantenimiento</p></div>
+                <div class="value-benefit"><div class="value-benefit-marker"></div><p>Soluciones durables para operación intensiva</p></div>
+                <div class="value-benefit"><div class="value-benefit-marker"></div><p>Fabricación a medida según necesidad del proyecto</p></div>
+                <div class="value-benefit"><div class="value-benefit-marker"></div><p>Acompañamiento técnico desde el diagnóstico hasta la entrega</p></div>
+            </div>
+        </div>
+    </section>
+    <section class="gallery-section" id="proyectos">
+        <div class="gallery-inner">
+            <div class="fade-up"><p class="section-label">Proyectos realizados</p><h2 class="section-title">Nuestro trabajo habla por nosotros</h2><p class="section-subtitle">Instalaciones reales para clientes de alta exigencia en el sector hospitalario y alimentario.</p></div>
+            <div class="gallery-grid fade-up">
+                <div class="gallery-item featured"><img src="https://lh3.googleusercontent.com/d/1s291oyKz2yyJtdaotKrZT-QuVTes9Fjy" alt="Proyecto destacado DTI LATAM"><div class="gallery-item-overlay"><span class="gallery-badge">Proyecto destacado</span><h4>Fundación Valle del Lili</h4><p>Mobiliario hospitalario en acero inoxidable</p></div></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1fBYM6K5BHoAu7FOscFgUcpJkYWU9ebuE" alt="Equipos clínicos DTI LATAM"><div class="gallery-item-overlay"><span class="gallery-badge">Hospitalario</span><h4>Equipos clínicos</h4><p>Fabricación a medida</p></div></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1Q3hmjBtZDcQXSeEgJF9glcSEZjzjFWRi" alt="Montajes industriales DTI LATAM"><div class="gallery-item-overlay"><span class="gallery-badge">Industrial</span><h4>Montajes industriales</h4><p>Instalación y puesta en marcha</p></div></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1N1Mc5DqKGxz6zZCdlyFazmuolt4FKMK_" alt="Soluciones especializadas DTI LATAM"><div class="gallery-item-overlay"><span class="gallery-badge">Fabricación</span><h4>Soluciones especializadas</h4><p>Acero inoxidable de alta calidad</p></div></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1EE8i6J4KXPKwE7WkZoyOXKtOEyeAF1j6" alt="Infraestructura de planta DTI LATAM"><div class="gallery-item-overlay"><span class="gallery-badge">Alimentario</span><h4>Infraestructura de planta</h4><p>Procesos higiénicos</p></div></div>
+            </div>
+        </div>
+    </section>
+    <section class="services-section" id="soluciones">
+        <div class="services-inner">
+            <div class="fade-up"><p class="section-label">Capacidades</p><h2 class="section-title">Servicios orientados a proyectos de alta exigencia</h2><p class="section-subtitle">Soluciones en acero inoxidable para organizaciones que necesitan funcionalidad, cumplimiento técnico y confianza.</p></div>
+            <div class="services-grid fade-up">
+                <div class="service-block"><p class="service-number">01</p><h3>Diseño y desarrollo</h3><p>Analizamos necesidades, condiciones de uso y objetivos para estructurar soluciones funcionales y viables.</p></div>
+                <div class="service-block"><p class="service-number">02</p><h3>Fabricación especializada</h3><p>Producimos estructuras, mobiliario, componentes y piezas con enfoque en calidad de acabado y resistencia.</p></div>
+                <div class="service-block"><p class="service-number">03</p><h3>Montajes industriales</h3><p>Instalación y montaje con precisión, orden y continuidad operativa.</p></div>
+                <div class="service-block"><p class="service-number">04</p><h3>Soluciones a medida</h3><p>Desarrollos personalizados para necesidades específicas de espacio, higiene y uso técnico.</p></div>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="productos">
+        <div class="fade-up"><p class="section-label">Portafolio</p><h2 class="section-title">Productos y soluciones que fabricamos</h2></div>
+        <div class="products-grid fade-up">
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg><h4>Mesas de trabajo</h4></div>
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><h4>Gabinetes y estantes</h4></div>
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M9 22V12h6v10"/></svg><h4>Campanas extractoras</h4></div>
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><h4>Vitrinas exhibidoras</h4></div>
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><h4>Equipos hospitalarios</h4></div>
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><h4>Equipos de llenado</h4></div>
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4a1 1 0 011 1v7a1 1 0 01-1 1h-4V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><h4>Carros transportadores</h4></div>
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg><h4>Planchas y asadores</h4></div>
+            <div class="product-item"><svg class="product-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/></svg><h4>Lavaplatos industriales</h4></div>
+        </div>
+    </section>
+    <section class="section" id="sectores">
+        <div class="fade-up"><p class="section-label">Sectores</p><h2 class="section-title">Experiencia en sectores donde el cumplimiento no es opcional</h2></div>
+        <div class="sectors-grid fade-up">
+            <div class="sector-item"><svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg><h3>Hospitalario y clínico</h3><p>Fundación Valle del Lili, Clínica Imbanaco, Clínica Rey David, Clínica Vida. Higiene y seguridad del paciente.</p></div>
+            <div class="sector-item"><svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg><h3>Farmacéutico y laboratorio</h3><p>Productos Roche, Gama Nuclear, ABT Molecular Imaging (USA), Sky Lab. Precisión y alta exigencia.</p></div>
+            <div class="sector-item"><svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg><h3>Alimentos y bebidas</h3><p>Lácteos La Alquería, Super de Alimentos, Mexifrost (USA). Procesos higiénicos y operación continua.</p></div>
+        </div>
+    </section>
+    <section class="why-section">
+        <div class="why-inner">
+            <div class="fade-up"><p class="section-label">Diferenciadores</p><h2 class="section-title">Un aliado técnico para proyectos que no admiten improvisación</h2></div>
+            <div class="why-grid fade-up">
+                <div class="why-item"><span class="why-item-number">1</span><div class="why-item-text"><h4>Enfoque técnico real</h4><p>Orientado a resolver necesidades reales de operación.</p></div></div>
+                <div class="why-item"><span class="why-item-number">2</span><div class="why-item-text"><h4>Personalización total</h4><p>Según sector, flujo de trabajo y condiciones del espacio.</p></div></div>
+                <div class="why-item"><span class="why-item-number">3</span><div class="why-item-text"><h4>Talento humano calificado</h4><p>Honestidad, cumplimiento y responsabilidad.</p></div></div>
+                <div class="why-item"><span class="why-item-number">4</span><div class="why-item-text"><h4>Alcance internacional</h4><p>Clientes en Colombia y Estados Unidos.</p></div></div>
+                <div class="why-item"><span class="why-item-number">5</span><div class="why-item-text"><h4>Acompañamiento integral</h4><p>Del diagnóstico a la entrega y puesta en marcha.</p></div></div>
+                <div class="why-item"><span class="why-item-number">6</span><div class="why-item-text"><h4>Calidad de ejecución</h4><p>Precisión, orden y confianza en cada proyecto.</p></div></div>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="proceso">
+        <div class="fade-up"><p class="section-label">Metodología</p><h2 class="section-title">Cómo desarrollamos cada proyecto</h2></div>
+        <div class="process-grid fade-up">
+            <div class="process-step"><p class="process-step-num">01</p><h3>Diagnóstico técnico</h3><p>Revisamos entorno, condiciones de uso y objetivo del proyecto.</p></div>
+            <div class="process-step"><p class="process-step-num">02</p><h3>Diseño de la solución</h3><p>Propuesta funcional, personalizada y alineada con sus requerimientos.</p></div>
+            <div class="process-step"><p class="process-step-num">03</p><h3>Fabricación</h3><p>Calidad, exactitud y cumplimiento del alcance definido.</p></div>
+            <div class="process-step"><p class="process-step-num">04</p><h3>Entrega y montaje</h3><p>Implementación validada para asegurar valor real en su operación.</p></div>
+        </div>
+    </section>
+    <section class="cta-section" id="contacto">
+        <h2 class="fade-up">Convierta una necesidad técnica en una solución confiable</h2>
+        <p class="fade-up">Si su organización necesita una solución en acero inoxidable con enfoque en higiene, durabilidad y respaldo técnico, podemos acompañarlo desde la definición hasta la implementación.</p>
+        <div class="cta-buttons fade-up">
+            <a href="mailto:gerencia.dtilatam@gmail.com" class="btn-primary">Hablar con un especialista</a>
+            <a href="tel:+573142712312" class="btn-secondary" style="border-color: oklch(35% 0.012 260); color: oklch(75% 0.008 260);">Llamar ahora: 314 271 2312</a>
+        </div>
+        <div class="gerente-card fade-up">
+            <div class="gerente-avatar">JS</div>
+            <div class="gerente-info">
+                <p class="role">Gerente de Proyectos</p>
+                <h4>Juan de Jesús Sánchez</h4>
+                <p class="contact-line">314 271 2312 · 320 797 1934 · gerencia.dtilatam@gmail.com</p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="faq">
+        <div class="fade-up"><p class="section-label">Preguntas frecuentes</p><h2 class="section-title">Lo que necesita saber</h2></div>
+        <div class="faq-list fade-up">
+            <div class="faq-item"><button class="faq-question">¿Qué tipo de soluciones desarrolla DTI LATAM?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-answer"><p>Soluciones en acero inoxidable para sectores hospitalario, farmacéutico, alimentario e industrial. Mesas, gabinetes, campanas, equipos de cocción, vitrinas, equipos de llenado, mobiliario hospitalario y más.</p></div></div>
+            <div class="faq-item"><button class="faq-question">¿Las soluciones son estándar o a medida?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-answer"><p>Priorizamos soluciones personalizadas según el espacio, uso previsto y necesidades reales de operación.</p></div></div>
+            <div class="faq-item"><button class="faq-question">¿En qué ubicaciones atienden?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-answer"><p>Desde Cali, Valle del Cauca, con cobertura nacional y proyectos internacionales en Estados Unidos.</p></div></div>
+            <div class="faq-item"><button class="faq-question">¿Cómo solicito cotización?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-answer"><p>Contacte a Juan de Jesús Sánchez al 314 271 2312 o gerencia.dtilatam@gmail.com.</p></div></div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-top">
+            <div><p class="footer-brand-name">DTI LATAM</p><p class="footer-brand-sub">Diseño Tecnología e Ingeniería S.A.S.</p><p class="footer-brand-desc">Servicios integrales de ingeniería. Estructuras en acero inoxidable para la industria de alimentos y hospitalaria.</p><p class="footer-apics">Miembro de A.P.I.C.S.</p></div>
+            <div class="footer-col"><h5>Navegación</h5><a href="#soluciones">Soluciones</a><a href="#proyectos">Proyectos</a><a href="#sectores">Sectores</a><a href="#proceso">Proceso</a><a href="#faq">FAQ</a></div>
+            <div class="footer-col"><h5>Contacto</h5><p>Carrera 11D # 33F-12</p><p>Cali, Valle del Cauca</p><p>Colombia</p><p style="margin-top:8px">Tel: 314 271 2312</p><p>Tel: 320 797 1934</p><p>gerencia.dtilatam@gmail.com</p></div>
+            <div class="footer-col"><h5>Gerencia</h5><div class="footer-gerente"><strong>Juan de Jesús Sánchez</strong><span>Gerente de Proyectos</span></div><p style="margin-top:16px;font-size:0.75rem;color:oklch(50% 0.008 260)">Atención personalizada con respuesta oportuna, segura y confiable.</p></div>
+        </div>
+        <div class="footer-bottom"><p class="footer-copy">© 2026 DTI LATAM · Diseño Tecnología e Ingeniería S.A.S.</p><p class="footer-location">Cali, Valle del Cauca, Colombia</p></div>
+    </footer>
+    <script>
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.faq-question').forEach(btn => { btn.addEventListener('click', () => { const item = btn.parentElement; const wasOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open')); if (!wasOpen) item.classList.add('open'); }); });
+    </script>
 </body>
 </html>
